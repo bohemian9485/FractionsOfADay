@@ -59,9 +59,9 @@
                 ' Splits the decimal part
                 Dim decimalLeft As String = Left(decimalPart, 1)
                 Dim decimalRight As String = Right(decimalPart, 1)
-                ' If decimalRight is greater than carryCriteria, adds 1 to decimalLeft
+                ' If decimalRight is greater than CARRY_CRITERIA, adds 1 to decimalLeft
                 Dim carryOver As Integer = IIf(Int(decimalRight) > carryCriteria, Int(decimalLeft) + 1, Int(decimalLeft))
-                ' If carryOver is greater than carryCriteria, adds 1 to wholeNumberPart
+                ' If carryOver is greater than CARRY_CRITERIA, adds 1 to wholeNumberPart
                 wholeNumberPart = IIf(carryOver > carryCriteria, wholeNumberPart + 1, wholeNumberPart)
                 ' Second iteration (converts wholeNumberPart to number with one decimal place)
                 result = wholeNumberPart / 10
@@ -71,7 +71,7 @@
                 numberAsText = Format(result, "#,##0.0")
                 ' Gets the decimal part of numberAsText
                 decimalPart = Right(numberAsText, 1)
-                ' If decimalPart is Greater than carryCriteria, adds one to wholeNumberPart
+                ' If decimalPart is Greater than CARRY_CRITERIA, adds one to wholeNumberPart
                 wholeNumberPart = IIf(Int(decimalPart) > carryCriteria, wholeNumberPart + 1, wholeNumberPart)
                 ' Returns wholeNumberPart as decimal number by dividing it by 1000
                 FractionsOfADay = wholeNumberPart / 1000
