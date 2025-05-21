@@ -29,10 +29,18 @@
         End Set
     End Property
 
+    Private totalDays As Integer
+    Public WriteOnly Property DaysInMonth() As Integer
+        Set(value As Integer)
+            totalDays = value
+        End Set
+    End Property
+
     Public Sub GetClassSettings()
         With My.Settings
             workMinutes = .TotalWorkMinutes
             carryCriteria = .CarryOverCriteria
+            totalDays = .DaysPerMonth
         End With
     End Sub
 
@@ -40,6 +48,7 @@
         With My.Settings
             .TotalWorkMinutes = workMinutes
             .CarryOverCriteria = carryCriteria
+            .DaysPerMonth = totalDays
             .Save()
         End With
     End Sub
@@ -80,5 +89,10 @@
 
         End Try
         Return FractionsOfADay
+    End Function
+
+    Public Function CreditsEarned(DaysWorked As Integer) As Decimal
+        CreditsEarned = Math.Round(1.25 / totalDays * DaysWorked, 3)
+        Return CreditsEarned
     End Function
 End Class
